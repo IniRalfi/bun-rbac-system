@@ -1,15 +1,16 @@
 {
   "name": "bun-rbac-system",
   "module": "index.ts",
-  "type": "module",
-  "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@tailwindcss/cli": "^4.2.4",
+    "@types/bun": "latest",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.13",
+    "tailwindcss": "^4.2.4"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
-  "dependencies": {
-    "tailwind": "^4.0.0"
-  }
+  "private": true,
+  "type": "module"
 }
