@@ -8,17 +8,23 @@
   <link href="/css/tailwind.css" rel="stylesheet">
 </head>
 
+<!-- Hapus baris ini atau ganti jadi teks biasa tanpa simbol tag -->
+
 <body class="bg-gray-100">
   <div class="flex">
-    <% include sidebar %>
+    <!-- Cukup panggil begini -->
+    <%- include('sidebar') %>
+
       <div class="flex-1">
-        <% include header %>
+        <%- include('header') %>
           <main class="p-6">
-            <% include body %>
+            <%- include(body) %>
           </main>
-          <% include footer %>
+          <%- include('footer') %>
       </div>
   </div>
 </body>
+
+
 
 </html>

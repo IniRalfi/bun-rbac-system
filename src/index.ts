@@ -39,6 +39,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// Redirect halaman utama ke login
+app.use((req, res, next) => {
+  if (req.path === "/") {
+    return res.redirect("/login");
+  }
+  next();
+});
+
 app.use("/users", userRoutes);
 app.use("/roles", roleRoutes);
 app.use("/permissions", permissionRoutes);
