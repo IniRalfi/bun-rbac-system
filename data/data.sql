@@ -30,3 +30,5 @@ CREATE TABLE role_permissions (
   FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,  
   FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE
 );
+
+INSERT INTO roles (name) VALUES ('admin'), ('editor');

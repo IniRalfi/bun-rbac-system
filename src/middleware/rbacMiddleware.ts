@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import pool from "../config/database";
 
 interface AuthRequest extends Request {
-  user?: { id: number; role_id: number };
+  user?: { id: number; username: string; role_id: number };
 }
 
 export const checkPermission = (requiredPermission: string) => {

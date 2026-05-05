@@ -6,6 +6,7 @@ import permissionRoutes from "./routers/permissionRoutes";
 import path from "path";
 import session from "express-session";
 import authRoutes from "./routers/authRoutes";
+import methodOverride from "method-override";
 
 // Tambahkan deklarasi ini supaya TypeScript tahu req.user itu ada
 declare global {
@@ -22,6 +23,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 app.use(
   session({

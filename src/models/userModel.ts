@@ -21,7 +21,7 @@ export const getAllUsers = async (): Promise<User[]> => {
 
 export const findByUsername = async (username: string): Promise<User | null> => {
   const [rows] = await pool.query<User[]>("SELECT * FROM users WHERE username = ?", [username]);
-  return rows.length > 0 ? rows[0] : null;
+  return rows[0] || null;
 };
 
 export const createUser = async (userData: any) => {

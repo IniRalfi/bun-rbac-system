@@ -17,7 +17,7 @@ export const storeUser = async (req: Request, res: Response) => {
 };
 
 export const removeUser = async (req: Request, res: Response) => {
-  const id = req.params.id;
+  const id = req.params.id as string; // Paksa jadi string
   if (id) {
     await deleteUser(parseInt(id));
   }
