@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Bun RBAC</title>
+  <link href="/css/tailwind.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white p-8 rounded shadow-md w-96">
+    <h2 class="text-2xl font-bold mb-6 text-center">Login Sistem</h2>
+    <form action="/login" method="POST">
+      <div class="mb-4">
+        <label class="block mb-2 text-sm font-medium">Username</label>
+        <input type="text" name="username" class="w-full p-2 border rounded" required>
+      </div>
+      <div class="mb-6">
+        <label class="block mb-2 text-sm font-medium">Password</label>
+        <input type="password" name="password" class="w-full p-2 border rounded" required>
+      </div>
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+        Masuk
+      </button>
+    </form>
+  </div>
+</body>
+
+</html>
