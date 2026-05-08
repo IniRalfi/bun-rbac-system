@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>403 — Akses Ditolak</title>
+  <link href="/css/tailwind.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="text-center max-w-md">
+    <p class="text-8xl font-black text-red-200">403</p>
+    <h1 class="text-2xl font-bold text-gray-800 mt-2">Akses Ditolak</h1>
+    <p class="text-gray-500 mt-2">
+      Kamu tidak memiliki permission <code
+        class="font-mono text-sm bg-gray-200 px-1.5 py-0.5 rounded text-gray-700"><%= requiredPermission %></code>
+      untuk mengakses halaman ini.
+    </p>
+    <div class="mt-6 flex gap-3 justify-center">
+      <a href="javascript:history.back()"
+        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium px-5 py-2.5 rounded-lg transition text-sm">
+        ← Kembali
+      </a>
+      <a href="/users"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2.5 rounded-lg transition text-sm">
+        Dashboard
+      </a>
+    </div>
+    <% if (typeof user !=='undefined' && user) { %>
+      <p class="text-xs text-gray-400 mt-6">Login sebagai: <strong>
+          <%= user.username %>
+        </strong> (Role ID: <%= user.role_id %>)</p>
+      <% } %>
+  </div>
+</body>
+
+</html>

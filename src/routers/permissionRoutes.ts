@@ -1,11 +1,19 @@
 import { Router } from "express";
-import { listUsers, storeUser, removeUser } from "../controllers/userController";
-import { checkPermission } from "../middleware/rbacMiddleware";
+import {
+  listPermissions,
+  showCreatePermission,
+  storePermission,
+  removePermission,
+} from "../controllers/permissionController";
+import { checkPermission, isAuthenticated } from "../middleware/rbacMiddleware";
 
 const router = Router();
 
-router.get("/", checkPermission("user:view"), listUsers);
-router.post("/", checkPermission("user:create"), storeUser);
-router.delete("/:id", checkPermission("user:delete"), removeUser);
+router.use(isAuthenticated); // Proteksi semua route di bawah ini
+
+router.get("/", checkPermission("permission:view"), listPermissions);
+router.get("/create", checkPermission("permission:create"), showCreatePermission);
+router.post("/", checkPermission("permission:create"), storePermission);
+router.delete("/:id", checkPermission("permission:delete"), removePermission);
 
 export default router;

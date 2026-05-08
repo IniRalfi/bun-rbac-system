@@ -1,13 +1,13 @@
 import type { Request, Response, NextFunction } from "express";
 import pool from "../config/database";
 
-// Middleware buat cek apakah user sudah login
+// ─── Middleware: Cek apakah user sudah login ───────────────────────────────
 export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   if (req.user?.id) return next();
   return res.redirect("/login?error=unauthenticated");
 };
 
-// Middleware buat cek permission berdasarkan role
+// ─── Middleware: Cek permission berdasarkan role ───────────────────────────
 export const checkPermission = (requiredPermission: string) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -28,7 +28,7 @@ export const checkPermission = (requiredPermission: string) => {
 
       if (permissions.includes(requiredPermission)) return next();
 
-      // Render halaman 403 HTML
+      // Render halaman 403 HTML (bukan JSON lagi)
       return res.status(403).render("errors/403", {
         title: "403 — Akses Ditolak",
         requiredPermission,

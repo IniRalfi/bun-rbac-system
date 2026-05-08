@@ -8,7 +8,6 @@ import session from "express-session";
 import authRoutes from "./routers/authRoutes";
 import methodOverride from "method-override";
 
-// Tambahkan deklarasi ini supaya TypeScript tahu req.user itu ada
 declare global {
   namespace Express {
     interface Request {
@@ -27,23 +26,24 @@ app.use(methodOverride("_method"));
 
 app.use(
   session({
-    secret: "rahasia-banget",
+    secret: process.env.SESSION_SECRET || "rbac-secret-key",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { secure: false },
   }),
 );
 
+// Inject user dari session ke req.user
 app.use((req, res, next) => {
   req.user = (req as any).session?.user;
+  // Inject ke semua view: currentPath untuk active sidebar
+  res.locals.currentPath = req.path;
   next();
 });
 
-// Redirect halaman utama ke login
+// Redirect root ke login
 app.use((req, res, next) => {
-  if (req.path === "/") {
-    return res.redirect("/login");
-  }
+  if (req.path === "/") return res.redirect("/login");
   next();
 });
 
@@ -51,6 +51,11 @@ app.use("/users", userRoutes);
 app.use("/roles", roleRoutes);
 app.use("/permissions", permissionRoutes);
 app.use("/", authRoutes);
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).render("errors/404", { title: "404 - Halaman Tidak Ditemukan" });
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on http://localhost:${process.env.PORT}`);

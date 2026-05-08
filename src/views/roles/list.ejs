@@ -1,9 +1,9 @@
 <div class="bg-white rounded-xl shadow-sm border border-gray-200">
   <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-    <h2 class="text-lg font-semibold text-gray-800">Daftar User</h2>
-    <a href="/users/create"
+    <h2 class="text-lg font-semibold text-gray-800">Daftar Role</h2>
+    <a href="/roles/create"
       class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-2">
-      <span>+</span> Tambah User
+      <span>+</span> Tambah Role
     </a>
   </div>
 
@@ -12,37 +12,39 @@
       <thead>
         <tr class="bg-gray-50 text-gray-500 uppercase text-xs tracking-wider">
           <th class="py-3 px-6 text-left font-semibold">#</th>
-          <th class="py-3 px-6 text-left font-semibold">Username</th>
-          <th class="py-3 px-6 text-left font-semibold">Role</th>
+          <th class="py-3 px-6 text-left font-semibold">Nama Role</th>
+          <th class="py-3 px-6 text-center font-semibold">Jumlah Permission</th>
           <th class="py-3 px-6 text-center font-semibold">Aksi</th>
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-100">
-        <% if (users.length===0) { %>
+        <% if (roles.length===0) { %>
           <tr>
-            <td colspan="4" class="py-10 text-center text-gray-400">Belum ada data user</td>
+            <td colspan="4" class="py-10 text-center text-gray-400">Belum ada data role</td>
           </tr>
           <% } %>
-            <% users.forEach((u, index)=> { %>
+            <% roles.forEach((role, index)=> { %>
               <tr class="hover:bg-gray-50 transition">
                 <td class="py-3 px-6 text-gray-400">
                   <%= index + 1 %>
                 </td>
-                <td class="py-3 px-6 font-medium text-gray-800">
-                  <%= u.username %>
+                <td class="py-3 px-6 font-semibold text-gray-800 capitalize">
+                  <%= role.name %>
                 </td>
-                <td class="py-3 px-6">
+                <td class="py-3 px-6 text-center">
                   <span
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700">
-                    <%= u.role_name || 'No Role' %>
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                    <%= role.permission_count %> permission
                   </span>
                 </td>
                 <td class="py-3 px-6">
                   <div class="flex items-center justify-center gap-3">
-                    <a href="/users/<%= u.id %>/edit"
-                      class="text-indigo-500 hover:text-indigo-700 font-medium transition text-xs">Edit</a>
-                    <form action="/users/<%= u.id %>?_method=DELETE" method="POST"
-                      onsubmit="return confirm('Yakin hapus user <%= u.username %>?')">
+                    <a href="/roles/<%= role.id %>/permissions"
+                      class="text-indigo-500 hover:text-indigo-700 font-medium transition text-xs">
+                      Kelola Permission
+                    </a>
+                    <form action="/roles/<%= role.id %>?_method=DELETE" method="POST"
+                      onsubmit="return confirm('Yakin hapus role <%= role.name %>?')">
                       <button type="submit" class="text-red-500 hover:text-red-700 font-medium transition text-xs">
                         Hapus
                       </button>
@@ -56,6 +58,6 @@
   </div>
 
   <div class="px-6 py-3 border-t border-gray-100">
-    <p class="text-xs text-gray-400">Total: <%= users.length %> user</p>
+    <p class="text-xs text-gray-400">Total: <%= roles.length %> role</p>
   </div>
 </div>
