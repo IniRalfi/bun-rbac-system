@@ -9,12 +9,11 @@ CREATE TABLE roles (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabel permissions
 CREATE TABLE permissions (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(100) UNIQUE NOT NULL,
   resource VARCHAR(50),
-  action VARCHAR(20)
+  action VARCHAR(20)  -- <--- GANTI INI DARI 'source' JADI 'action'
 );
 
 -- Tabel users
